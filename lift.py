@@ -24,7 +24,7 @@ while True:
                         for button in range(len(push_button)):
                             buttons_out_cabin_list.append(int(push_button[button]))
                 else:
-                    print(f'Двери лифта открылись на {F_xx}-м этаже.')
+                    print(f'\nДвери лифта открылись на {F_xx}-м этаже.')
                     buttons_out_cabin_list.remove(i)
         elif F_xx > current_floor:
             for i in range(current_floor, int(F_xx) + 1):
@@ -39,10 +39,11 @@ while True:
                         for button in range(len(push_button)):
                             buttons_out_cabin_list.append(int(push_button[button]))
                 else:
-                    print(f'Двери лифта открылись на {F_xx}-м этаже.')
+                    print(f'\nДвери лифта открылись на {F_xx}-м этаже.')
                     buttons_out_cabin_list.remove(i)
         C_xx = int(input(f'Человек зашел в лифт и нажал кнопку этажа №'))
         count_people_in_lift += 1
+        print("\nКоличество людей в лифте:", count_people_in_lift)
         buttons_in_cabin_list.append(C_xx)     # нажатые кнопки в лифте
         current_floor = F_xx
         lift_condition = True
@@ -54,7 +55,7 @@ while True:
             print('Двери закрываются. Лифт начинает движение вверх')
             for f in range(current_floor, C_xx+1):
                 if f == current_floor:
-                    print(f'Лифт был вызван на {C_xx}-м этаже и '
+                    print(f'\nЛифт был вызван на {C_xx}-м этаже и '
                           f'начал движение вверх с {current_floor}-го этажа.')
                 elif f != C_xx:
                     print(f'Лифт проезжает мимо {f}-го этажа вверх. '
@@ -68,12 +69,12 @@ while True:
                     if f in buttons_out_cabin_list:
                         print('На этом этаже была нажата кнопка вызова. Дверь открывается.')
                         buttons_out_cabin_list.remove(f)
-                        if count_people_in_lift < 5:      # проверка на загруженность лифта
-                            c_xx = int(input(f'Человек зашел в лифт и нажал кнопку этажа №'))
+                        if count_people_in_lift < 3:      # проверка на загруженность лифта
+                            c_xx = int(input(f'Человек зашел в лифт и нажал кнопку этажа № '))
                             buttons_in_cabin_list.append(c_xx)
                             count_people_in_lift += 1
                         else:
-                            print('Лифт переполнен. Максимум 4 человека. Двери закрываются.')
+                            print('Лифт переполнен. Максимум 3 человека. Двери закрываются.')
                     if f in buttons_in_cabin_list:
                         print(f'Лифт останавливается на {f}-м этаже. Пассажир выходит.')
                         buttons_in_cabin_list.remove(f)
@@ -82,7 +83,6 @@ while True:
                         if count_people_in_lift == 0:
                             lift_condition = False
                             continue
-
                 elif f == C_xx:
                     print(f'Двери лифта открылись на {C_xx}-м этаже. Пассажир выходит.')
                     buttons_in_cabin_list.remove(f)
@@ -101,7 +101,7 @@ while True:
                     print(f'Лифт был вызван на {C_xx}-м этаже и '
                           f'начал движение вниз с {current_floor}-го этажа.')
                 elif f != C_xx:
-                    print(f'Лифт проезжает мимо {f}-го этажа вниз. '
+                    print(f'\nЛифт проезжает мимо {f}-го этажа вниз. '
                           f'Есть ли действия на других этажах? Да/Нет', end=' ')
                     act = input()
                     if act == "Да":
@@ -112,14 +112,15 @@ while True:
                     if f in buttons_out_cabin_list:
                         print('На этом этаже была нажата кнопка вызова. Дверь открывается.')
                         buttons_out_cabin_list.remove(f)
-                        if count_people_in_lift < 5:  # проверка на загруженность лифта
-                            c_xx = int(input(f'Человек зашел в лифт и нажал кнопку этажа №'))
+                        print("Количество людей в лифте:", count_people_in_lift)
+                        if count_people_in_lift < 3:  # проверка на загруженность лифта
+                            c_xx = int(input(f'Человек зашел в лифт и нажал кнопку этажа № '))
                             buttons_in_cabin_list.append(c_xx)
                             count_people_in_lift += 1
                         else:
-                            print('Лифт переполнен. Максимум 4 человека. Двери закрываются.')
+                            print('Лифт переполнен. Максимум 3 человека. Двери закрываются.')
                     if f in buttons_in_cabin_list:
-                        print(f'Лифт останавливается на {f}-м этаже. Пассажир выходит.')
+                        print(f'\nЛифт останавливается на {f}-м этаже. Пассажир выходит.')
                         buttons_in_cabin_list.remove(f)
                         count_people_in_lift -= 1
                 elif f == C_xx:
@@ -132,3 +133,4 @@ while True:
                         C_xx = buttons_in_cabin_list[0]
                     else:
                         lift_condition = False
+                        F_xx = buttons_out_cabin_list[0]
